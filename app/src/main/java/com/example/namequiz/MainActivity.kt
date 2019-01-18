@@ -9,8 +9,6 @@ import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
-    data class Names(val name: String = "", val imgId: String);
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
