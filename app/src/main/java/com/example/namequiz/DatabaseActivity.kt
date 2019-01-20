@@ -5,43 +5,33 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
 import java.util.jar.Attributes
+import android.content.Intent
+
+
 
 class DatabaseActivity : AppCompatActivity() {
 
-    private val a = 5
-    private val b = 10
-    private var lv: ListView? = null
-    private var customeAdapter: NameAdapter? = null
-    private var namesArrayList: ArrayList<Names>? = null
-    private val imgIdList = intArrayOf(R.drawable.person1, R.drawable.person1, R.drawable.person1, R.drawable.person1, R.drawable.person1, R.drawable.person1, R.drawable.person1, R.drawable.person1)
-    private val nameList = arrayOf("Benz", "Bike", "Car", "Carrera", "Ferrari", "Harly", "Lamborghini", "Silver")
+    private lateinit var adapter: NameAdapter
+    private lateinit var namesListView: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_database)
 
-        lv = findViewById(R.id.list_database) as ListView
+        namesListView = findViewById(R.id.list_database) as ListView
 
-        namesArrayList = populateList()
-        Log.d("hjhjh", namesArrayList!!.size.toString() + "")
-        customeAdapter = NameAdapter(this, namesArrayList!!)
-        lv!!.adapter = customeAdapter
+        // Get list of members
+        //val i = intent
+        //val navBarTitle: String = R.string.database.toString()
+        //supportActionBar?.title = navBarTitle
+        //var list = i.getSerializableExtra("LIST") as ArrayList<Names>
 
+        var intent: Intent =intent
+        var list:List<Names> = ArrayList<Names>()
+        list = intent.getParcelableArrayListExtra("list")
 
-
-    }
-
-    private fun populateList(): ArrayList<Names> {
-
-        val list = ArrayList<Names>()
-
-        for (i in 0..7) {
-            val names = Names();
-            names.setName(nameList[i])
-            names.setImgId(imgIdList[i])
-            list.add(names)
-        }
-
-        return list
+        // instantiate and set adapter
+        adapter = NameAdapter(this, list)
+        namesListView.adapter = adapter
     }
 }

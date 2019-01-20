@@ -19,15 +19,29 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
                 android:name=".DatabaseActivity"
-                android:parentActivityName=".MainActivity"
-                android:theme="@style/NameTheme">
+                android:parentActivityName=".MainActivity">
+
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".MainActivity" />
+                    android:value=".MainActivity"/>
         </activity>
-    </application>
+
+        <activity
+            android:name=".AddActivity"
+            android:parentActivityName=".MainActivity">
+
+        <!-- The meta-data tag is required if you support API level 15 and lower -->
+        <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+    </activity>
+</application>
+
+    <uses-feature android:name="android.hardware.camera"
+                  android:required="false" />
 
 </manifest>

@@ -11,56 +11,31 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class NameAdapter(private val context: Context, private val items: ArrayList<Names>) : BaseAdapter() {
+class NameAdapter(private var context: Context, private var nameList: ArrayList<Names>) : BaseAdapter() {
 
-    private class ViewHolder(row: View?) {
-        var personName: TextView? = null;
-        internal var imageId: ImageView? = null;
+    override fun getCount(): Int { return nameList.size }
+    override fun getItem(i: Int): Any { return nameList[i] }
+    override fun getItemId(i: Int): Long { return i.toLong() }
 
-        init {
-            this.imageId = row?.findViewById<ImageView>(R.id.imageId);
-            this.personName = row?.findViewById<TextView>(R.id.personName);
-        }
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?) : View? {
-        val view: View?
-        val vh: ViewHolder
-
-        if (convertView == null) {
-            view = layoutInflater.inflate(R.layout.listview_database, parent, false)
-            vh = ViewHolder(view)
-            view.tag = vh
-            Log.i("JSA", "set Tag for ViewHolder, position: " + position)
-        } else {
-            view = convertView
-            vh = view.tag as ViewHolder
+    override fun getView(i: Int, view: View?, viewGroup: ViewGroup) : View {
+        var view = view
+        if(view == null) {
+            // inflate layout resource if its null
+            view = LayoutInflater.from(context).inflate(R.layout.listview_database, viewGroup, false)
         }
 
-        vh.personName.text = notesList[position].title
-        vh.imageId.text = notesList[position].content
+        // get current name
+        val name = this.getItem(i) as Names
+
+        // reference textviews and imageviews from our layout
+        val img = view!!.findViewById<ImageView>(R.id.imageId) as ImageView
+        val nameText = view.findViewById<TextView>(R.id.personName) as TextView
+
+        // Bind data to TextView and ImageView
+        nameText.text = name.getName()
+        img.setImageResource(name.getImgId())
 
         return view
     }
 
-    override fun getViewTypeCount(): Int {
-        return count
-    }
-
-    override fun getItemViewType(position: Int): Int {
-
-        return position
-    }
-
-    override fun getCount(): Int {
-        return items.size
-    }
-
-    override fun getItem(position: Int): Any {
-        return items[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return 0
-    }
 }

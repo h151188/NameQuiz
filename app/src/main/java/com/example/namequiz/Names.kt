@@ -1,24 +1,43 @@
 package com.example.namequiz
 
-class Names {
+import android.os.Parcel
+import android.os.Parcelable
+import java.io.Serializable
 
-    private var name: String? = null
-    private var imgId: Int = 0
-
-    fun getName(): String {
-        return name.toString()
+class Names(private val name:String, private val imgId: Int) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readInt()
+    ) {
     }
 
-    fun setName(name: String) {
-        this.name = name
+   fun getName(): String {
+        return name
     }
 
     fun getImgId(): Int {
         return imgId
     }
 
-    fun setImgId(imgId: Int) {
-        this.imgId = imgId
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeInt(imgId)
     }
 
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object {
+        @JvmField
+        val CREATOR = object : Parcelable.Creator<Names> {
+            override fun createFromParcel(parcel: Parcel): Names {
+                return Names(parcel)
+            }
+
+            override fun newArray(size: Int): Array<Names?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
 }

@@ -5,4 +5,9 @@
     <string name="database">Database</string>
     <string name="add_new_name">Legg til nytt navn</string>
     <string name="exit">Avslutt</string>
+    <string name="upload">Last opp</string>
+    <string name="take_pic">Ta bilde</string>
+    <string name="enter_name">Ditt navn:</string>
+    <string name="add">Legg til</string>
+    <string name="toast_new_name">Nytt navn lagt til</string>
 </resources>
