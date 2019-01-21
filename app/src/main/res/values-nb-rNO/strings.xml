@@ -10,4 +10,7 @@
     <string name="enter_name">Ditt navn:</string>
     <string name="add">Legg til</string>
     <string name="toast_new_name">Nytt navn lagt til</string>
+    <string name="quiz_who_is_this">Hvem er dette?</string>
+    <string name="quiz_next">Neste</string>
+    <string name="quiz_score">Poeng:</string>
 </resources>

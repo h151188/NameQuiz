@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import java.io.Serializable
-import android.content.Context
 import android.os.Parcelable
 
 class MainActivity : AppCompatActivity() {
@@ -33,16 +31,21 @@ class MainActivity : AppCompatActivity() {
         list.add(name)
         name = Names("David", R.drawable.person1)
         list.add(name)
-        name = Names("Randi", R.drawable.person1)
+        name = Names("Glenn", R.drawable.person1)
         list.add(name)
 
-        //System.out.println(Database().getList().get(0))
-
         // Get reference to buttons
+        val btn_start = findViewById(R.id.button_start) as Button
         val btn_database = findViewById(R.id.button_database) as Button
         val btn_add = findViewById(R.id.button_add) as Button
 
         // Set on-click listener
+        btn_start.setOnClickListener {
+            var intent = Intent(applicationContext, QuizActivity::class.java)
+            intent.putParcelableArrayListExtra("list", list as java.util.ArrayList<out Parcelable>)
+            startActivity(intent)
+        }
+
         btn_database.setOnClickListener {
             var intent = Intent(applicationContext, DatabaseActivity::class.java)
             intent.putParcelableArrayListExtra("list", list as java.util.ArrayList<out Parcelable>)
@@ -50,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_add.setOnClickListener {
-            intent = Intent(this, AddActivity::class.java)
+            var intent = Intent(this, AddActivity::class.java)
             startActivityForResult(intent, 3)
         }
 
