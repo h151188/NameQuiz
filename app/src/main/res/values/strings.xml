@@ -12,4 +12,7 @@
     <string name="quiz_who_is_this">Who is this?</string>
     <string name="quiz_next">Next</string>
     <string name="quiz_score">Score:</string>
+    <string name="quiz_correct">Correct answer!</string>
+    <string name="quiz_wrong">Wrong answer!</string>
+    <string name="quiz_reset_score">Reset score</string>
 </resources>

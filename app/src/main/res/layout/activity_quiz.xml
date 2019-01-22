@@ -13,9 +13,9 @@
             android:id="@+id/quiz_pic"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="62dp"
             android:layout_marginStart="62dp" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="56dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="63dp"
-            android:layout_marginRight="63dp" app:layout_constraintHorizontal_bias="0.0"
-            app:srcCompat="@drawable/person2"/>
+            android:layout_marginTop="68dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="63dp"
+            android:layout_marginRight="63dp" app:layout_constraintHorizontal_bias="1.0"
+    />//app:srcCompat="@drawable/person2"/>
     <TextView
             android:gravity="center"
             android:layout_width="201dp"
@@ -51,18 +51,28 @@
             android:textStyle="bold" android:textColor="#FFFFFF" app:layout_constraintHorizontal_bias="1.0"/>
     <TextView
             android:text="@string/quiz_score"
-            android:layout_width="wrap_content"
+            android:layout_width="86dp"
             android:layout_height="wrap_content"
             android:id="@+id/textView3" android:textColor="@android:color/black"
             android:textStyle="bold" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="62dp"
             android:layout_marginStart="62dp" android:layout_marginTop="24dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/quiz_show_score"
-            android:layout_marginEnd="3dp" android:layout_marginRight="3dp"/>
+            android:layout_marginEnd="3dp" android:layout_marginRight="3dp" android:textSize="24sp"/>
     <TextView
-            android:layout_width="94dp"
+            android:layout_width="54dp"
             android:layout_height="wrap_content"
             android:id="@+id/quiz_show_score" android:layout_marginEnd="212dp" android:layout_marginRight="212dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="24dp" app:layout_constraintStart_toEndOf="@+id/textView3"
-            android:layout_marginLeft="3dp" android:layout_marginStart="3dp" android:textColor="@android:color/black"/>
+            android:layout_marginLeft="3dp" android:layout_marginStart="3dp" android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+    <Button
+            android:text="@string/quiz_reset_score"
+            android:layout_width="108dp"
+            android:layout_height="38dp"
+            android:padding="8dp"
+            android:id="@+id/button_quiz_reset"
+            android:background="@drawable/button_background_scalable" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" android:layout_marginRight="16dp" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toTopOf="parent" android:textColor="#FFFFFF"/>
 </android.support.constraint.ConstraintLayout>

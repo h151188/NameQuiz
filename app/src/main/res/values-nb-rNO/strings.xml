@@ -13,4 +13,7 @@
     <string name="quiz_who_is_this">Hvem er dette?</string>
     <string name="quiz_next">Neste</string>
     <string name="quiz_score">Poeng:</string>
+    <string name="quiz_correct">Riktig svar!</string>
+    <string name="quiz_wrong">Feil svar!</string>
+    <string name="quiz_reset_score">Tilbakestill poeng</string>
 </resources>
