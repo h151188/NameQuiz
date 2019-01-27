@@ -16,4 +16,6 @@
     <string name="quiz_correct">Riktig svar!</string>
     <string name="quiz_wrong">Feil svar!</string>
     <string name="quiz_reset_score">Tilbakestill poeng</string>
+    <string name="db_edit">Rediger</string>
+    <string name="db_delete">Slett</string>
 </resources>

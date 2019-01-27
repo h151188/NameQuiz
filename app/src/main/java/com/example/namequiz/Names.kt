@@ -4,10 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.io.Serializable
 
-class Names(private val name:String, private val imgId: Int) : Parcelable {
+class Names(private val name:String, private val imgId: String) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readInt()
+        parcel.readString()
     ) {
     }
 
@@ -15,13 +15,13 @@ class Names(private val name:String, private val imgId: Int) : Parcelable {
         return name
     }
 
-    fun getImgId(): Int {
+    fun getImgId(): String {
         return imgId
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
-        parcel.writeInt(imgId)
+        parcel.writeString(imgId)
     }
 
     override fun describeContents(): Int {

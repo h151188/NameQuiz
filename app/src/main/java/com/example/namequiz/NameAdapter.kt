@@ -2,6 +2,7 @@ package com.example.namequiz
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,9 +34,35 @@ class NameAdapter(private var context: Context, private var nameList: ArrayList<
 
         // Bind data to TextView and ImageView
         nameText.text = name.getName()
-        img.setImageResource(name.getImgId())
+        setPic(img, name)
+        //img.setImageResource(name.getImgId())
 
         return view
+    }
+
+    private fun setPic(img: ImageView, name: Names) {
+        // Get the dimensions of the View
+        val targetW: Int = img.width
+        val targetH: Int = img.height
+
+        val bmOptions = BitmapFactory.Options().apply {
+            // Get the dimensions of the bitmap
+            inJustDecodeBounds = true
+            BitmapFactory.decodeFile(name.getImgId(), this)
+            val photoW: Int = outWidth
+            val photoH: Int = outHeight
+
+            // Determine how much to scale down the image
+            val scaleFactor: Int = Math.min(photoW / targetW, photoH / targetH)
+
+            // Decode the image file into a Bitmap sized to fill the View
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+            inPurgeable = true
+        }
+        BitmapFactory.decodeFile(name.getImgId(), bmOptions)?.also { bitmap ->
+            img.setImageBitmap(bitmap)
+        }
     }
 
 }
