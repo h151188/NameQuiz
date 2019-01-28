@@ -1,5 +1,6 @@
 package com.example.namequiz
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -22,26 +23,23 @@ class MainActivity : AppCompatActivity() {
         // Set on-click listeners
         btn_start.setOnClickListener {
             var intent = Intent(applicationContext, QuizActivity::class.java)
-            //intent.putParcelableArrayListExtra("list", list as java.util.ArrayList<out Parcelable>)
             startActivity(intent)
         }
 
         btn_database.setOnClickListener {
             var intent = Intent(applicationContext, DatabaseActivity::class.java)
-            //intent.putParcelableArrayListExtra("list", list as java.util.ArrayList<out Parcelable>)
             startActivity(intent);
         }
 
         btn_add.setOnClickListener {
             var intent = Intent(applicationContext, AddActivity::class.java)
-            //intent.putParcelableArrayListExtra("list", list as java.util.ArrayList<out Parcelable>)
             startActivityForResult(intent, 3)
         }
 
     }
 
     // Exit the application
-    fun exitApplication(View: View) {
+    fun exitApplication() {
         finish();
         System.exit(0);
     }
@@ -52,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 3) {
+        if (requestCode == 3 && resultCode == RESULT_OK) {
             // Toast to show that the name was added to the database
             val toast = Toast.makeText(
                 applicationContext,

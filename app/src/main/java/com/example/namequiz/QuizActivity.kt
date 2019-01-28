@@ -17,7 +17,6 @@ class QuizActivity : AppCompatActivity() {
 
     private var quiz_correct: Int = 0
     private var quiz_tries: Int = 0
-    //var list:List<Names> = ArrayList<Names>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

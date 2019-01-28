@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -30,10 +31,12 @@ class NameAdapter(private var context: Context, private var nameList: ArrayList<
         val name = this.getItem(i) as Names
 
         // reference textviews and imageviews from our layout
-        val img = view!!.findViewById<ImageView>(R.id.imageId) as ImageView
-        val nameText = view.findViewById<TextView>(R.id.personName) as TextView
+        val img = view!!.findViewById(R.id.imageId) as ImageView
+        val nameText = view.findViewById(R.id.personName) as TextView
+        val delButton = view.findViewById(R.id.button_database_delete) as Button
 
         // Bind data to TextView and ImageView
+        delButton.setTag(i)
         nameText.text = name.name
         var imgFile = Uri.parse(name.imgId) as Uri
 

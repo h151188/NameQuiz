@@ -16,14 +16,12 @@ import android.support.v4.content.FileProvider
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import java.io.File
-import java.io.IOException
-import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 import android.R.attr.data
+import android.content.ContextWrapper
 import android.database.Cursor
-import java.io.FileNotFoundException
+import java.io.*
 
 
 class AddActivity : AppCompatActivity() {
@@ -74,11 +72,10 @@ class AddActivity : AppCompatActivity() {
     fun addNewName() {
         var btn_name = findViewById(R.id.new_name) as EditText
         val replyIntent = Intent()
-        var name:Names =Names(btn_name.text.toString(), mCurrentPhotoPath)
+        var name: Names = Names(btn_name.text.toString(), mCurrentPhotoPath)
         val gv = applicationContext as GlobalVars
         gv.names.add(name)
-        //replyIntent.putExtra("new_name", name)
-        setResult(3,replyIntent);
+        setResult(-1, replyIntent);
         finish()
     }
 
@@ -118,21 +115,8 @@ class AddActivity : AppCompatActivity() {
         }
 
         // If picture was uploaded from local successfully
-        if (requestCode === GET_FROM_GALLERY && resultCode === Activity.RESULT_OK) {
-            var selectedImage: Uri = data!!.getData()
-            var filePathColumn = { MediaStore.Images.Media.DATA } as Array<String>
-
-            var cursor: Cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null)
-            cursor.moveToFirst()
-
-            var columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
-            var picturePath: String = cursor.getString(columnIndex)
-            cursor.close()
-
-            var imageView = findViewById(R.id.add_thumbnail) as ImageView
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath))
-            mCurrentPhotoPath = picturePath
+        if (requestCode == GET_FROM_GALLERY && resultCode == RESULT_OK) {
+            manageImageFromUri(data!!.getData())
         }
     }
 
@@ -189,9 +173,57 @@ class AddActivity : AppCompatActivity() {
             // Decode the image file into a Bitmap sized to fill the View
             inJustDecodeBounds = false
             inSampleSize = scaleFactor
-            inPurgeable = true
+            //inPurgeable = true
         }
         BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)?.also { bitmap ->
+            pic.setImageBitmap(bitmap)
+        }
+    }
+
+    /**
+     * Saves the picture from gallery to application
+     */
+    private fun manageImageFromUri(uri: Uri) {
+        var pic = findViewById(R.id.add_thumbnail) as ImageView
+        var bitmap: Bitmap? = null
+
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(
+                this.getContentResolver(), uri
+            )
+
+        } catch (e: Exception) {
+            // Manage exception ...
+        }
+
+        if (bitmap != null) {
+            // Get the context wrapper instance
+            val wrapper = ContextWrapper(applicationContext)
+
+            // The bellow line return a directory in internal storage
+            var file = wrapper.getDir("images", Context.MODE_PRIVATE)
+
+            // Create a file to save the image
+            file = File(file, "${UUID.randomUUID()}.jpg")
+
+            try {
+                // Get the file output stream
+                val stream: OutputStream = FileOutputStream(file)
+
+                // Compress bitmap
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+                // Flush the stream
+                stream.flush()
+
+                // Close stream
+                stream.close()
+            } catch (e: IOException){ // Catch the exception
+                e.printStackTrace()
+            }
+
+            // saves the saved image path
+            mCurrentPhotoPath = file.absolutePath
             pic.setImageBitmap(bitmap)
         }
     }
