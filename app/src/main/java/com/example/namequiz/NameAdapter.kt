@@ -34,37 +34,11 @@ class NameAdapter(private var context: Context, private var nameList: ArrayList<
         val nameText = view.findViewById<TextView>(R.id.personName) as TextView
 
         // Bind data to TextView and ImageView
-        nameText.text = name.getName()
-        var imgFile = Uri.parse(name.getImgId()) as Uri
+        nameText.text = name.name
+        var imgFile = Uri.parse(name.imgId) as Uri
 
         img.setImageURI(imgFile)
 
         return view
     }
-/*
-    private fun setPic(img: ImageView, name: Names) {
-        // Get the dimensions of the View
-        val targetW: Int = img.width
-        val targetH: Int = img.height
-
-        val bmOptions = BitmapFactory.Options().apply {
-            // Get the dimensions of the bitmap
-            inJustDecodeBounds = true
-            BitmapFactory.decodeFile(name.getImgId(), this)
-            val photoW: Int = outWidth
-            val photoH: Int = outHeight
-
-            // Determine how much to scale down the image
-            val scaleFactor: Int = Math.min(photoW / targetW, photoH / targetH)
-
-            // Decode the image file into a Bitmap sized to fill the View
-            inJustDecodeBounds = false
-            inSampleSize = scaleFactor
-            inPurgeable = true
-        }
-        BitmapFactory.decodeFile(name.getImgId(), bmOptions)?.also { bitmap ->
-            img.setImageBitmap(bitmap)
-        }
-    }
-*/
 }

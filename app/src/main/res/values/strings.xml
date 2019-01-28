@@ -13,8 +13,9 @@
     <string name="quiz_next">Next</string>
     <string name="quiz_score">Score:</string>
     <string name="quiz_correct">Correct answer!</string>
-    <string name="quiz_wrong">Wrong answer!</string>
+    <string name="quiz_wrong">Wrong answer, correct answer is</string>
     <string name="quiz_reset_score">Reset score</string>
     <string name="db_edit">Edit</string>
     <string name="db_delete">Delete</string>
+    <string name="db_add">Add New Name</string>
 </resources>

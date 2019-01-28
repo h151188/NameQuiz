@@ -51,7 +51,6 @@ class GlobalVars : Application() {
         // Get the context wrapper instance
         val wrapper = ContextWrapper(applicationContext)
 
-        // Initializing a new file
         // The bellow line return a directory in internal storage
         var file = wrapper.getDir("images", Context.MODE_PRIVATE)
 

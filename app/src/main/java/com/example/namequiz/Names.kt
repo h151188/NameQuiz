@@ -2,8 +2,9 @@ package com.example.namequiz
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.io.Serializable
 
+data class Names(var name: String, var imgId: String)
+/*
 class Names(private val name:String, private val imgId: String) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -40,4 +41,4 @@ class Names(private val name:String, private val imgId: String) : Parcelable {
             }
         }
     }
-}
+}*/

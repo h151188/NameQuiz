@@ -43,10 +43,10 @@ class QuizActivity : AppCompatActivity() {
         var random = list.random()
 
         // Sets the picture of the person to the imageview
-        var imgFile = Uri.parse(random.getImgId()) as Uri
+        var imgFile = Uri.parse(random.imgId) as Uri
         img.setImageURI(imgFile)
 
-        System.out.println(random.getName())
+        System.out.println(random.name)
 
         // Checks if input was correct or not
         btn_next.setOnClickListener {
@@ -67,7 +67,7 @@ class QuizActivity : AppCompatActivity() {
         var input: String = inputField.text.toString()
         inputField.setText("")
 
-        if(input.equals(random.getName(), true)) {
+        if(input.equals(random.name, true)) {
             quiz_tries++
             quiz_correct++
             val toast = Toast.makeText(
@@ -78,9 +78,10 @@ class QuizActivity : AppCompatActivity() {
             toast.show()
         } else {
             quiz_tries++
+            var wrong: String = resources.getString(R.string.quiz_wrong)
             val toast = Toast.makeText(
                 applicationContext,
-                R.string.quiz_wrong,
+                wrong + " " + random.name,
                 Toast.LENGTH_SHORT
             )
             toast.show()
@@ -110,30 +111,4 @@ class QuizActivity : AppCompatActivity() {
         quiz_tries = 0
         updateScore()
     }
-
-    /*
-    private fun setPic(img: ImageView, name: Names) {
-        // Get the dimensions of the View
-        val targetW: Int = img.width
-        val targetH: Int = img.height
-
-        val bmOptions = BitmapFactory.Options().apply {
-            // Get the dimensions of the bitmap
-            inJustDecodeBounds = true
-            BitmapFactory.decodeFile(name.getImgId(), this)
-            val photoW: Int = outWidth
-            val photoH: Int = outHeight
-
-            // Determine how much to scale down the image
-            val scaleFactor: Int = Math.min(photoW / targetW, photoH / targetH)
-
-            // Decode the image file into a Bitmap sized to fill the View
-            inJustDecodeBounds = false
-            inSampleSize = scaleFactor
-            inPurgeable = true
-        }
-        BitmapFactory.decodeFile(name.getImgId(), bmOptions)?.also { bitmap ->
-            img.setImageBitmap(bitmap)
-        }
-    }*/
 }

@@ -2,13 +2,11 @@ package com.example.namequiz
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ListView
-import java.util.jar.Attributes
 import android.content.Intent
-import android.view.View
-import android.widget.Button
-
+import android.R
+import android.view.Menu
+import android.view.MenuItem
 
 class DatabaseActivity : AppCompatActivity() {
 
@@ -21,18 +19,34 @@ class DatabaseActivity : AppCompatActivity() {
 
         namesListView = findViewById(R.id.list_database) as ListView
 
-        //var btnEdit = findViewById(R.id.button_database_edit) as Button
         //var btnDelete = findViewById(R.id.button_database_delete) as Button
-
-        /*btnEdit.setOnClickListener {
-            editName()
-        }*/
 
         val gv = applicationContext as GlobalVars
 
         // instantiate and set adapter
         adapter = NameAdapter(this, gv.names)
         namesListView.adapter = adapter
+        /*
+        btnDelete.setOnClickListener {
+
+            gv.names.remove()
+            namesListView.invalidateViews();
+        }*/
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_database, menu)
+        return super.onCreateOptionsMenu(menu)
+        //return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.getItemId()
+        if (id == R.id.menu_db_add_new_name) {
+            var intent = Intent(applicationContext, AddActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 /*
     private fun deleteName(name: Names) {
@@ -41,8 +55,4 @@ class DatabaseActivity : AppCompatActivity() {
         setResult(2,replyIntent);
         finish()
     }*/
-
-    private fun editName() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }
