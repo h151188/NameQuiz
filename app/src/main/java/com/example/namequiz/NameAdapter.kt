@@ -34,12 +34,12 @@ class NameAdapter(private var context: Context, private var nameList: ArrayList<
 
         // Bind data to TextView and ImageView
         nameText.text = name.getName()
-        setPic(img, name)
+        //setPic(img, name)
         //img.setImageResource(name.getImgId())
 
         return view
     }
-
+/*
     private fun setPic(img: ImageView, name: Names) {
         // Get the dimensions of the View
         val targetW: Int = img.width
@@ -64,5 +64,5 @@ class NameAdapter(private var context: Context, private var nameList: ArrayList<
             img.setImageBitmap(bitmap)
         }
     }
-
+*/
 }

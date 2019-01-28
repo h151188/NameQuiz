@@ -100,7 +100,7 @@ class AddActivity : AppCompatActivity() {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
-        System.out.println(storageDir.toString())
+
 /*
         if(!storageDir.exists()) {
             if(!storageDir.mkdirs()) {
@@ -115,6 +115,7 @@ class AddActivity : AppCompatActivity() {
         ).apply {
             // Save a file: path for use with ACTION_VIEW intents
             mCurrentPhotoPath = absolutePath
+            System.out.println(mCurrentPhotoPath)
         }
     }
 
@@ -123,6 +124,7 @@ class AddActivity : AppCompatActivity() {
             val f = File(mCurrentPhotoPath)
             mediaScanIntent.data = Uri.fromFile(f)
             sendBroadcast(mediaScanIntent)
+            System.out.println("Add to gallery " + mCurrentPhotoPath)
         }
     }
 

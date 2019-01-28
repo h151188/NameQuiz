@@ -33,6 +33,8 @@ class QuizActivity : AppCompatActivity() {
         //img.setImageResource(random.getImgId())
         //setPic(img, random)
 
+        System.out.println(random.getName())
+
         btn_next.setOnClickListener {
             checkInput(random)
         }
@@ -46,9 +48,6 @@ class QuizActivity : AppCompatActivity() {
         var inputField = findViewById(R.id.quiz_input) as EditText
         var input: String = inputField.text.toString()
         inputField.setText("")
-
-        System.out.println(input)
-        System.out.println(random.getName())
 
         if(input.equals(random.getName(), true)) {
             quiz_tries++
@@ -85,7 +84,7 @@ class QuizActivity : AppCompatActivity() {
         quiz_tries = 0
         updateScore()
     }
-
+/*
     private fun setPic(img: ImageView, name: Names) {
         // Get the dimensions of the View
         val targetW: Int = img.width
@@ -109,5 +108,5 @@ class QuizActivity : AppCompatActivity() {
         BitmapFactory.decodeFile(name.getImgId(), bmOptions)?.also { bitmap ->
             img.setImageBitmap(bitmap)
         }
-    }
+    }*/
 }
