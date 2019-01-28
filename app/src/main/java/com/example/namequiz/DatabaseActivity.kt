@@ -33,20 +33,6 @@ class DatabaseActivity : AppCompatActivity() {
         // instantiate and set adapter
         adapter = NameAdapter(this, gv.names)
         namesListView.adapter = adapter
-
-
-
-        // Get list of members
-        //val i = intent
-        //val navBarTitle: String = R.string.database.toString()
-        //supportActionBar?.title = navBarTitle
-        //var list = i.getSerializableExtra("LIST") as ArrayList<Names>
-
-        /*var intent: Intent =intent
-        var list:List<Names>
-        list = intent.getParcelableArrayListExtra("list")*/
-
-
     }
 /*
     private fun deleteName(name: Names) {

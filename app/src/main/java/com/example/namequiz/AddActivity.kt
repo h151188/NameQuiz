@@ -21,11 +21,16 @@ import java.io.IOException
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
+import android.R.attr.data
+import android.database.Cursor
+import java.io.FileNotFoundException
+
 
 class AddActivity : AppCompatActivity() {
 
     val REQUEST_IMAGE_CAPTURE = 1
     val REQUEST_TAKE_PHOTO = 1
+    val GET_FROM_GALLERY = 3
     var mCurrentPhotoPath: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +50,29 @@ class AddActivity : AppCompatActivity() {
         btn_add.setOnClickListener {
             addNewName()
         }
+
+        btn_upload.setOnClickListener {
+            uploadPicture()
+        }
     }
 
+    /**
+     * Uploads a file from local gallery
+     */
+    fun uploadPicture() {
+        startActivityForResult(
+            Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI
+            ), GET_FROM_GALLERY
+        )
+    }
+
+    /**
+     * Adds a new name to the global arraylist of names
+     */
     fun addNewName() {
         var btn_name = findViewById(R.id.new_name) as EditText
-
         val replyIntent = Intent()
         var name:Names =Names(btn_name.text.toString(), mCurrentPhotoPath)
         val gv = applicationContext as GlobalVars
@@ -84,29 +107,43 @@ class AddActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Function for setting the picture taken to imageview and adding it to the gallery
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //var pic = findViewById(R.id.add_thumbnail) as ImageView
+        // If picture was taken successfully
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            //val imageBitmap = data!!.extras.get("data") as Bitmap
-            //pic.setImageBitmap(imageBitmap)
             setPic()
             galleryAddPic()
         }
+
+        // If picture was uploaded from local successfully
+        if (requestCode === GET_FROM_GALLERY && resultCode === Activity.RESULT_OK) {
+            var selectedImage: Uri = data!!.getData()
+            var filePathColumn = { MediaStore.Images.Media.DATA } as Array<String>
+
+            var cursor: Cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null)
+            cursor.moveToFirst()
+
+            var columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
+            var picturePath: String = cursor.getString(columnIndex)
+            cursor.close()
+
+            var imageView = findViewById(R.id.add_thumbnail) as ImageView
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath))
+            mCurrentPhotoPath = picturePath
+        }
     }
 
+    /**
+     * Creates a file where the picture taken will be stored to
+     */
     @Throws(IOException::class)
     private fun createImageFile(): File? {
         // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-
-
-/*
-        if(!storageDir.exists()) {
-            if(!storageDir.mkdirs()) {
-                return null
-            }
-        }*/
 
         return File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */
@@ -115,10 +152,12 @@ class AddActivity : AppCompatActivity() {
         ).apply {
             // Save a file: path for use with ACTION_VIEW intents
             mCurrentPhotoPath = absolutePath
-            System.out.println(mCurrentPhotoPath)
         }
     }
 
+    /**
+     * Submits the picture to the gallery
+     */
     private fun galleryAddPic() {
         Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
             val f = File(mCurrentPhotoPath)
@@ -128,6 +167,9 @@ class AddActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Decode a scaled image
+     */
     private fun setPic() {
         var pic = findViewById(R.id.add_thumbnail) as ImageView
         // Get the dimensions of the View

@@ -3,6 +3,7 @@ package com.example.namequiz
 import android.app.Activity
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,8 +35,9 @@ class NameAdapter(private var context: Context, private var nameList: ArrayList<
 
         // Bind data to TextView and ImageView
         nameText.text = name.getName()
-        //setPic(img, name)
-        //img.setImageResource(name.getImgId())
+        var imgFile = Uri.parse(name.getImgId()) as Uri
+
+        img.setImageURI(imgFile)
 
         return view
     }
