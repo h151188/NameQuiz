@@ -12,4 +12,7 @@ interface NamesDao {
 
     @Insert
     fun insertAll(vararg names: Names)
+
+    @Insert
+    fun insertNames(names: List<Names>)
 }
