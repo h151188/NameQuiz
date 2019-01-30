@@ -36,11 +36,16 @@ class NameAdapter(private var context: Context, private var nameList: ArrayList<
         val delButton = view.findViewById(R.id.button_database_delete) as Button
 
         // Bind data to TextView and ImageView
-        delButton.setTag(i)
+        //delButton.setTag(i)
         nameText.text = name.name
         var imgFile = Uri.parse(name.imgId) as Uri
 
         img.setImageURI(imgFile)
+
+        delButton.setOnClickListener {
+            val gv = context as GlobalVars
+            gv.names.removeAt(i)
+        }
 
         return view
     }

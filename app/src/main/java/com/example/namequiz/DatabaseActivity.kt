@@ -23,14 +23,6 @@ class DatabaseActivity : AppCompatActivity() {
         setListView()
     }
 
-    /**
-     * Delete a name from the arraylist and removes it from the listview
-     */
-    fun deleteName(view: View?) {
-        val gv = applicationContext as GlobalVars
-        gv.names.remove(view!!.getTag())
-        namesListView.invalidateViews();
-    }
 
     /**
      * Initializes the listview of names
