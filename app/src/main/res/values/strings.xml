@@ -18,4 +18,5 @@
     <string name="db_edit">Edit</string>
     <string name="db_delete">Delete</string>
     <string name="db_add">Add New Name</string>
+    <string name="validation_empty">Name cannot be empty</string>
 </resources>

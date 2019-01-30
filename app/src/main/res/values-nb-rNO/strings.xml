@@ -19,4 +19,5 @@
     <string name="db_edit">Rediger</string>
     <string name="db_delete">Slett</string>
     <string name="db_add">Legg til nytt navn</string>
+    <string name="validation_empty">Navn kan ikke være tom</string>
 </resources>

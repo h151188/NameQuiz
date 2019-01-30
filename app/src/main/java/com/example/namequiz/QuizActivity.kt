@@ -11,8 +11,6 @@ import java.io.File
 import java.nio.file.Files.exists
 
 
-
-
 class QuizActivity : AppCompatActivity() {
 
     private var quiz_correct: Int = 0
