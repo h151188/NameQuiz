@@ -1,6 +1,7 @@
 package com.example.namequiz
 
 import android.app.Activity
+import android.arch.persistence.room.Room
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -34,8 +35,8 @@ class DatabaseActivity : AppCompatActivity() {
         val gv = applicationContext as GlobalVars
 
         // Set up our database
-        //appDatabase = appDatabase().getInstance()
-        //namesDao = appDatabase.namesDao()
+        //val namesDao = AppDatabase.getInstance(application).namesDao()
+        //val repository: NamesRepository = NamesRepository(namesDao)
 
         namesListView = findViewById(R.id.list_database) as ListView
         // instantiate and set adapter

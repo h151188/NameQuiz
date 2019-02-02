@@ -1,5 +1,6 @@
 package com.example.namequiz
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
@@ -8,11 +9,11 @@ import android.arch.persistence.room.Query
 interface NamesDao {
 
     @Query("SELECT * FROM namequiz")
-    fun getAll(): List<Names>
+    fun getAll(): LiveData<List<Names>>
 
     @Insert
-    fun insertAll(vararg names: Names)
+    fun insertName(vararg names: Names)
 
     @Insert
-    fun insertNames(names: List<Names>)
+    fun insertAllNames(names: List<Names>)
 }

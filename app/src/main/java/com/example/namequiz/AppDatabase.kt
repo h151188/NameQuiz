@@ -38,14 +38,14 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
-                AppDatabase::class.java, "Sample.db")
+                AppDatabase::class.java, "names-db")
                 // prepopulate the database after onCreate was called
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         // insert the data on the IO Thread
                         ioThread {
-                            getInstance(context).namesDao().insertNames(PREPOPULATE_DATA)
+                            getInstance(context).namesDao().insertAllNames(PREPOPULATE_DATA)
                         }
                     }
                 })

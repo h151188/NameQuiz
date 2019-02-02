@@ -1,6 +1,7 @@
 package com.example.namequiz
 
 import android.app.Activity
+import android.arch.lifecycle.LiveData
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
