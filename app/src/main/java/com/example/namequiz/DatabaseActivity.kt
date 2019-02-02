@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -17,8 +18,8 @@ class DatabaseActivity : AppCompatActivity() {
     private lateinit var adapter: NameAdapter
     private lateinit var namesListView: ListView
 
-    private lateinit var appDatabase: AppDatabase
-    private lateinit var namesDao: NamesDao
+    //private lateinit var database: AppDatabase
+    //private lateinit var namesDao: NamesDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +36,18 @@ class DatabaseActivity : AppCompatActivity() {
         val gv = applicationContext as GlobalVars
 
         // Set up our database
-        //val namesDao = AppDatabase.getInstance(application).namesDao()
-        //val repository: NamesRepository = NamesRepository(namesDao)
+        /*try {
+            database = Room.inMemoryDatabaseBuilder(this, AppDatabase::class.java)
+                .allowMainThreadQueries().build()
+        } catch (e: Exception) {
+            Log.i("test", e.message)
+        }
+        namesDao = database.namesDao()*/
+
 
         namesListView = findViewById(R.id.list_database) as ListView
         // instantiate and set adapter
-        adapter = NameAdapter(this, gv.names)
+        adapter = NameAdapter(this, gv.names)//namesDao.getAll())//gv.names)
         namesListView.adapter = adapter
     }
 

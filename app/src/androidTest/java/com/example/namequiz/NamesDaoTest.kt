@@ -50,7 +50,7 @@ class NamesDaoTest {
 
         // 2
         val listCategory = Names("Cats","bilde", 1)
-        namesDao.insertAll(listCategory)
+        namesDao.insertName(listCategory)
 
         //3
         val postInsertRetrievedCategories = namesDao.getAll()
