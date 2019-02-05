@@ -30,6 +30,7 @@ class AddActivity : AppCompatActivity() {
     val REQUEST_TAKE_PHOTO = 1
     val GET_FROM_GALLERY = 3
     var mCurrentPhotoPath: String = ""
+    private lateinit var namesViewModel: NamesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +74,9 @@ class AddActivity : AppCompatActivity() {
         var btn_name = findViewById(R.id.new_name) as EditText
         val replyIntent = Intent()
         var name: Names = Names(btn_name.text.toString(), mCurrentPhotoPath)
-        val gv = applicationContext as GlobalVars
-        gv.names.add(name)
+        //val gv = applicationContext as GlobalVars
+        //gv.names.add(name)
+        namesViewModel.insert(name)
         setResult(-1, replyIntent);
         finish()
     }

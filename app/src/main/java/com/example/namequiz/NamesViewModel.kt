@@ -1,5 +1,5 @@
 package com.example.namequiz
-/*
+
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
@@ -22,7 +22,7 @@ class NamesViewModel(application: Application) : AndroidViewModel(application) {
     val allWords: LiveData<List<Names>>
 
     init {
-        val namesDao = AppDatabase.getDatabase(application).namesDao()
+        val namesDao = AppDatabase.getDatabase(application, scope).namesDao()
         repository = NamesRepository(namesDao)
         allWords = repository.allNames
     }
@@ -35,4 +35,4 @@ class NamesViewModel(application: Application) : AndroidViewModel(application) {
         super.onCleared()
         parentJob.cancel()
     }
-}*/
+}

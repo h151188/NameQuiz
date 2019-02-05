@@ -1,18 +1,44 @@
 package com.example.namequiz
 
 import android.app.Activity
-import android.arch.persistence.room.Room
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.ListView
+import android.support.design.widget.FloatingActionButton
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.widget.Toast
 
+class DatabaseActivity : AppCompatActivity() {
+    private val newWordActivityRequestCode = 1
+    private lateinit var wordViewModel: NamesViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_database)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = NameAdapter(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // Get a new or existing ViewModel from the ViewModelProvider.
+        wordViewModel = ViewModelProviders.of(this).get(NamesViewModel::class.java)
+
+        // Add an observer on the LiveData returned by getAlphabetizedWords.
+        // The onChanged() method fires when the observed data changes and the activity is
+        // in the foreground.
+        wordViewModel.allWords.observe(this, Observer { names ->
+            // Update the cached copy of the words in the adapter.
+            names?.let { adapter.setNames(it) }
+        })
+    }
+}
+
+/*
 class DatabaseActivity : AppCompatActivity() {
 
     private lateinit var adapter: NameAdapter
@@ -93,3 +119,4 @@ class DatabaseActivity : AppCompatActivity() {
         }
     }
 }
+*/
