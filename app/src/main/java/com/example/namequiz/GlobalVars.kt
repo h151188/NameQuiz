@@ -1,4 +1,4 @@
-package com.example.namequiz
+/*package com.example.namequiz
 
 import android.app.Application
 import android.content.Context
@@ -76,4 +76,4 @@ class GlobalVars : Application() {
         // Return the saved image uri
         return Uri.parse(file.absolutePath)
     }
-}
+}*/

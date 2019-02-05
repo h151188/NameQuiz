@@ -21,71 +21,27 @@ import java.io.OutputStream
 import java.util.*
 import kotlin.reflect.KParameter
 
-@Database(entities = [Names::class], version = 1)
+@Database(entities = arrayOf(Names::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun namesDao(): NamesDao
 
     companion object {
-        @Volatile
+
         private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(
-            context: Context,
-            scope: CoroutineScope
-        ): AppDatabase {
+        fun getDatabase(context: Context): AppDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "names-db"
-                )
-                    // Wipes and rebuilds instead of migrating if no Migration object.
-                    // Migration is not part of this codelab.
-                    //.fallbackToDestructiveMigration()
-                    //.addCallback(AppDatabaseCallback(scope))
-                    .build()
-                INSTANCE = instance
-                // return instance
-                instance
-            }
-        }
-
-        private class AppDatabaseCallback(
-            private val scope: CoroutineScope
-        ) : RoomDatabase.Callback() {
-            /**
-             * Override the onOpen method to populate the database.
-             * For this sample, we clear the database every time it is created or opened.
-             */
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                super.onOpen(db)
-                // If you want to keep the data through app restarts,
-                // comment out the following line.
-                INSTANCE?.let { database ->
-                    scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.namesDao())
-                    }
+            if (INSTANCE == null) {
+                synchronized(AppDatabase::class) {
+                    INSTANCE = Room.databaseBuilder(
+                        context.getApplicationContext(),
+                        AppDatabase::class.java, "names-db"
+                    ).allowMainThreadQueries().build()
                 }
             }
-        }
-
-
-        /**
-         * Populate the database in a new coroutine.
-         * If you want to start with more words, just add them.
-         */
-        fun populateDatabase(namesDao: NamesDao) {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate on creation.
-            //namesDao.deleteAll()
-
-            var word = Names("Espen", R.drawable.espen.toString())
-            namesDao.insertName(word)
-            word = Names("Glenn", R.drawable.glenn.toString())
-            namesDao.insertName(word)
+            return INSTANCE!!
         }
     }
 }

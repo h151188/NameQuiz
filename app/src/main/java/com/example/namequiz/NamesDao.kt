@@ -9,7 +9,7 @@ import android.arch.persistence.room.Query
 interface NamesDao {
 
     @Query("SELECT * FROM namequiz ORDER BY name ASC")
-    fun getAll(): LiveData<List<Names>>
+    fun getAll(): List<Names>
 
     @Insert
     fun insertName(vararg names: Names)

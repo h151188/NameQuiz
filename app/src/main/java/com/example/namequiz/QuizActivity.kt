@@ -32,7 +32,7 @@ class QuizActivity : AppCompatActivity() {
         var img = findViewById(R.id.quiz_pic) as ImageView
         var btn_next = findViewById(R.id.button_quiz_next) as Button
         var btn_reset = findViewById(R.id.button_quiz_reset) as Button
-
+/*
         // Getting global arraylist of names
         var gv = applicationContext as GlobalVars
         var list = gv.names
@@ -53,7 +53,7 @@ class QuizActivity : AppCompatActivity() {
         // Button for resetting the score
         btn_reset.setOnClickListener {
             resetScore()
-        }
+        }*/
     }
 
     /**

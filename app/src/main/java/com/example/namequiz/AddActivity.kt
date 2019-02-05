@@ -26,11 +26,11 @@ import java.io.*
 
 class AddActivity : AppCompatActivity() {
 
-    val REQUEST_IMAGE_CAPTURE = 1
-    val REQUEST_TAKE_PHOTO = 1
-    val GET_FROM_GALLERY = 3
-    var mCurrentPhotoPath: String = ""
-    private lateinit var namesViewModel: NamesViewModel
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val REQUEST_TAKE_PHOTO = 1
+    private val GET_FROM_GALLERY = 3
+    private var mCurrentPhotoPath: String = ""
+    private var db: AppDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +76,7 @@ class AddActivity : AppCompatActivity() {
         var name: Names = Names(btn_name.text.toString(), mCurrentPhotoPath)
         //val gv = applicationContext as GlobalVars
         //gv.names.add(name)
-        namesViewModel.insert(name)
+        db?.namesDao()?.insertName(name)
         setResult(-1, replyIntent);
         finish()
     }

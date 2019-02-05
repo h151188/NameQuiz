@@ -1,4 +1,4 @@
-package com.example.namequiz
+/*package com.example.namequiz
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
@@ -35,4 +35,4 @@ class NamesViewModel(application: Application) : AndroidViewModel(application) {
         super.onCleared()
         parentJob.cancel()
     }
-}
+}*/

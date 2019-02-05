@@ -15,11 +15,21 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
+    private var db: AppDatabase? = null
+
+    companion object {
+        val PREF_NAME: String = "PrefFile"
+
+    }
+
     private var appOwner: String = "owner"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        db = AppDatabase.getDatabase(this)
+        val names: List<Names>? = db?.namesDao()?.getAll()
 
         // Get reference to buttons
         val btn_start = findViewById(R.id.button_start) as Button

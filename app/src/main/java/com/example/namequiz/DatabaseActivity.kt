@@ -10,42 +10,18 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.ListView
 import android.widget.Toast
 
-class DatabaseActivity : AppCompatActivity() {
-    private val newWordActivityRequestCode = 1
-    private lateinit var wordViewModel: NamesViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_database)
-
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = NameAdapter(this)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // Get a new or existing ViewModel from the ViewModelProvider.
-        wordViewModel = ViewModelProviders.of(this).get(NamesViewModel::class.java)
-
-        // Add an observer on the LiveData returned by getAlphabetizedWords.
-        // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
-        wordViewModel.allWords.observe(this, Observer { names ->
-            // Update the cached copy of the words in the adapter.
-            names?.let { adapter.setNames(it) }
-        })
-    }
-}
-
-/*
 class DatabaseActivity : AppCompatActivity() {
 
     private lateinit var adapter: NameAdapter
     private lateinit var namesListView: ListView
 
-    //private lateinit var database: AppDatabase
-    //private lateinit var namesDao: NamesDao
+    private var db: AppDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,26 +30,25 @@ class DatabaseActivity : AppCompatActivity() {
         setListView()
     }
 
-
     /**
      * Initializes the listview of names
      */
     fun setListView() {
-        val gv = applicationContext as GlobalVars
+        //val gv = applicationContext as GlobalVars
 
         // Set up our database
-        /*try {
-            database = Room.inMemoryDatabaseBuilder(this, AppDatabase::class.java)
-                .allowMainThreadQueries().build()
+        try {
+            db = AppDatabase.getDatabase(this)
         } catch (e: Exception) {
             Log.i("test", e.message)
         }
-        namesDao = database.namesDao()*/
 
+        val names: List<Names>? = db?.namesDao()?.getAll()
 
         namesListView = findViewById(R.id.list_database) as ListView
+
         // instantiate and set adapter
-        adapter = NameAdapter(this, gv.names)//namesDao.getAll())//gv.names)
+        adapter = NameAdapter(this, names!!)
         namesListView.adapter = adapter
     }
 
@@ -119,4 +94,3 @@ class DatabaseActivity : AppCompatActivity() {
         }
     }
 }
-*/
