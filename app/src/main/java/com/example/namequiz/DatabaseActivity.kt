@@ -1,15 +1,8 @@
 package com.example.namequiz
 
-import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -34,22 +27,22 @@ class DatabaseActivity : AppCompatActivity() {
      * Initializes the listview of names
      */
     fun setListView() {
-        //val gv = applicationContext as GlobalVars
+        val gv = applicationContext as GlobalVars
 
         // Set up our database
-        try {
+        /*try {
             db = AppDatabase.getDatabase(this)
         } catch (e: Exception) {
             Log.i("test", e.message)
         }
 
         val names: List<Names>? = db?.namesDao()?.getAll()
-        System.out.println(names?.size)
+        System.out.println(names?.size)*/
 
         namesListView = findViewById(R.id.list_database) as ListView
 
         // instantiate and set adapter
-        adapter = NameAdapter(this, names!!)
+        adapter = NameAdapter(this, gv.names)//names!!)
         namesListView.adapter = adapter
     }
 

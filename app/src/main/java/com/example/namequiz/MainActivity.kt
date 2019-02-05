@@ -1,15 +1,12 @@
 package com.example.namequiz
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import android.os.Parcelable
 import android.widget.EditText
 import android.widget.TextView
 

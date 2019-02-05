@@ -1,28 +1,20 @@
 package com.example.namequiz
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.media.Image
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.os.Parcelable
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
-import android.util.Log
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import java.text.SimpleDateFormat
 import java.util.*
-import android.R.attr.data
 import android.content.ContextWrapper
-import android.database.Cursor
 import java.io.*
-
 
 class AddActivity : AppCompatActivity() {
 
