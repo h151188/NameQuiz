@@ -73,9 +73,10 @@ class AddActivity : AppCompatActivity() {
     fun addNewName() {
         var btn_name = findViewById(R.id.new_name) as EditText
         val replyIntent = Intent()
-        var name: Names = Names(btn_name.text.toString(), mCurrentPhotoPath)
+        var name = Names(btn_name.text.toString(), mCurrentPhotoPath)
         //val gv = applicationContext as GlobalVars
         //gv.names.add(name)
+        System.out.println(name.name + " " + name.imgId)
         db?.namesDao()?.insertName(name)
         setResult(-1, replyIntent);
         finish()

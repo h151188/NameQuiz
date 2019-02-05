@@ -44,6 +44,7 @@ class DatabaseActivity : AppCompatActivity() {
         }
 
         val names: List<Names>? = db?.namesDao()?.getAll()
+        System.out.println(names?.size)
 
         namesListView = findViewById(R.id.list_database) as ListView
 
