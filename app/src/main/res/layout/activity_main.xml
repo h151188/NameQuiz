@@ -8,8 +8,10 @@
         tools:context=".MainActivity">
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/namequiz" tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp" android:id="@+id/imageView" android:scaleType="centerInside"/>
+            android:layout_height="wrap_content" app:srcCompat="@drawable/namequiz"
+            android:id="@+id/imageView" android:scaleType="centerInside" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="3dp" app:layout_constraintBottom_toTopOf="@+id/appOwner"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
     <Button
             android:text="@string/start_quiz"
             android:layout_width="wrap_content"
