@@ -55,6 +55,11 @@ class DatabaseActivity : AppCompatActivity() {
         if (id == R.id.menu_db_add_new_name) {
             var intent = Intent(applicationContext, AddActivity::class.java)
             startActivityForResult(intent, 2)
+        } else if (id == R.id.menu_db_prepopulate) {
+            val gv = applicationContext as GlobalVars
+            var newList = gv.initArray()
+            AppDatabase.getDatabase(this).namesDao()?.insertAllNames(newList)
+            namesListView.deferNotifyDataSetChanged()
         }
         return super.onOptionsItemSelected(item)
     }

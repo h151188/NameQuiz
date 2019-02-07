@@ -6,4 +6,9 @@
             android:orderInCategory="100"
             android:title="@string/db_add"
             app:showAsAction="never" />
+    <item
+            android:id="@+id/menu_db_prepopulate"
+            android:orderInCategory="100"
+            android:title="@string/db_prepopulate"
+            app:showAsAction="never" />
 </menu>
