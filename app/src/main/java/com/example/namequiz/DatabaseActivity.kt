@@ -14,8 +14,6 @@ class DatabaseActivity : AppCompatActivity() {
     private lateinit var adapter: NameAdapter
     private lateinit var namesListView: ListView
 
-    private var db: AppDatabase? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_database)
@@ -27,22 +25,15 @@ class DatabaseActivity : AppCompatActivity() {
      * Initializes the listview of names
      */
     fun setListView() {
-        val gv = applicationContext as GlobalVars
+        //val gv = applicationContext as GlobalVars
 
         // Set up our database
-        /*try {
-            db = AppDatabase.getDatabase(this)
-        } catch (e: Exception) {
-            Log.i("test", e.message)
-        }
-
-        val names: List<Names>? = db?.namesDao()?.getAll()
-        System.out.println(names?.size)*/
+        var names: List<Names>? = AppDatabase.getDatabase(this).namesDao()?.getAll()
 
         namesListView = findViewById(R.id.list_database) as ListView
 
         // instantiate and set adapter
-        adapter = NameAdapter(this, gv.names)//names!!)
+        adapter = NameAdapter(this, names)
         namesListView.adapter = adapter
     }
 
