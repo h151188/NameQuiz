@@ -6,14 +6,19 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
+import android.widget.BaseAdapter
+
+
 
 class DatabaseActivity : AppCompatActivity() {
 
     private lateinit var adapter: NameAdapter
     private lateinit var namesListView: ListView
+    private lateinit var names: MutableList<Names>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +34,7 @@ class DatabaseActivity : AppCompatActivity() {
         //val gv = applicationContext as GlobalVars
 
         // Set up our database
-        var names: MutableList<Names>? =  AppDatabase.getDatabase(this).namesDao()?.getAll()
+        names =  AppDatabase.getDatabase(this).namesDao()?.getAll()
 
         namesListView = findViewById(R.id.list_database) as ListView
 
@@ -58,8 +63,17 @@ class DatabaseActivity : AppCompatActivity() {
         } else if (id == R.id.menu_db_prepopulate) {
             val gv = applicationContext as GlobalVars
             var newList = gv.initArray()
-            AppDatabase.getDatabase(this).namesDao()?.insertAllNames(newList)
-            namesListView.deferNotifyDataSetChanged()
+            AppDatabase.getDatabase(this).namesDao().insertAllNames(newList)
+            names.addAll(newList)
+            var listView = findViewById(R.id.list_database) as ListView
+            (listView.getAdapter() as BaseAdapter).notifyDataSetChanged()
+            return true
+        } else if (id == R.id.menu_db_delete_all) {
+            AppDatabase.getDatabase(this).namesDao().deleteAll()
+            names.clear()
+            var listView = findViewById(R.id.list_database) as ListView
+            (listView.getAdapter() as BaseAdapter).notifyDataSetChanged()
+            return true
         }
         return super.onOptionsItemSelected(item)
     }

@@ -18,7 +18,7 @@ class GlobalVars : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        names.addAll(initArray())
+        //names.addAll(initArray())
     }
 
     /**

@@ -20,6 +20,9 @@ interface NamesDao {
     @Query("SELECT * FROM namequiz WHERE id LIKE :Id")
     fun findByName(Id: Int) : Names
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertName(name: Names)
+    @Query("DELETE FROM namequiz")
+    fun deleteAll()
+
+    //@Insert(onConflict = OnConflictStrategy.REPLACE)
+    //fun insertName(name: Names)
 }

@@ -20,4 +20,5 @@
     <string name="db_add">Add New Name</string>
     <string name="validation_empty">Name cannot be empty</string>
     <string name="db_prepopulate">Prepopulate</string>
+    <string name="db_delete_all">Delete All</string>
 </resources>

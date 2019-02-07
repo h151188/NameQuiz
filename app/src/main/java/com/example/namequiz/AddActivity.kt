@@ -68,7 +68,7 @@ class AddActivity : AppCompatActivity() {
         //val gv = applicationContext as GlobalVars
         //gv.names.add(name)
         System.out.println(name.name + " " + name.imgId)
-        AppDatabase.getDatabase(this).namesDao()?.insertName(name)
+        AppDatabase.getDatabase(this).namesDao().insertName(name)
         setResult(-1, replyIntent);
         finish()
     }
