@@ -1,5 +1,9 @@
 package com.example.namequiz
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.app.DialogFragment
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -69,10 +73,7 @@ class DatabaseActivity : AppCompatActivity() {
             (listView.getAdapter() as BaseAdapter).notifyDataSetChanged()
             return true
         } else if (id == R.id.menu_db_delete_all) {
-            AppDatabase.getDatabase(this).namesDao().deleteAll()
-            names.clear()
-            var listView = findViewById(R.id.list_database) as ListView
-            (listView.getAdapter() as BaseAdapter).notifyDataSetChanged()
+            deleteAllConfirmation()
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -97,4 +98,36 @@ class DatabaseActivity : AppCompatActivity() {
             toast.show()
         }
     }
+
+    fun deleteAllConfirmation() {
+        val builder = AlertDialog.Builder(this@DatabaseActivity)
+
+        // Set the alert dialog title
+        builder.setTitle(R.string.db_delete_all_confirmation_title)
+
+        // Display a message on alert dialog
+        builder.setMessage(R.string.db_delete_all_confirmation)
+
+        // Set a positive button and its click listener on alert dialog
+        builder.setPositiveButton(R.string.ok){dialog, which ->
+            // Do something when user press the positive button
+            AppDatabase.getDatabase(this).namesDao().deleteAll()
+            names.clear()
+            var listView = findViewById(R.id.list_database) as ListView
+            (listView.getAdapter() as BaseAdapter).notifyDataSetChanged()
+        }
+
+
+        // Display a negative button on alert dialog
+        builder.setNegativeButton(R.string.cancel){dialog,which ->
+
+        }
+
+        // Finally, make the alert dialog using builder
+        val dialog: AlertDialog = builder.create()
+
+        // Display the alert dialog on app interface
+        dialog.show()
+    }
+
 }

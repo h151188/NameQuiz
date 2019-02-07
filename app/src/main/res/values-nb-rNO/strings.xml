@@ -23,4 +23,9 @@
     <string name="db_prepopulate">Legg til orginalnavn</string>
     <string name="db_delete_all">Slett alt</string>
     <string name="quiz_db_empty">Databasen er tom, venligst legg til et navn</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Avbryt</string>
+    <string name="db_delete_all_confirmation">Er du sikker at du vil slette alt?</string>
+    <string name="db_delete_all_confirmation_title">Slette alt</string>
+    <string name="quiz_reset_score_confirmation">Er du sikker på at du vil tilbakestille poengene?</string>
 </resources>
