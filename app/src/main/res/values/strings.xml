@@ -21,4 +21,5 @@
     <string name="validation_empty">Name cannot be empty</string>
     <string name="db_prepopulate">Prepopulate</string>
     <string name="db_delete_all">Delete All</string>
+    <string name="quiz_db_empty">The database is empty, please add a name</string>
 </resources>

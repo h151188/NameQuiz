@@ -31,23 +31,40 @@ class QuizActivity : AppCompatActivity() {
         //var gv = applicationContext as GlobalVars
         //var list = gv.names
         var list: List<Names>? = AppDatabase.getDatabase(this).namesDao()?.getAll()
-        var random = list!!.random()
+        var random: Names? = null
 
-        // Sets the picture of the person to the imageview
-        var imgFile = Uri.parse(random.imgId) as Uri
-        img.setImageURI(imgFile)
+        if(!list.isNullOrEmpty()) {
+            random = list!!.random()
 
-        System.out.println(random.name)
+            // Sets the picture of the person to the imageview
+            var imgFile = Uri.parse(random.imgId) as Uri
+            img.setImageURI(imgFile)
 
-        // Checks if input was correct or not
-        btn_next.setOnClickListener {
-            checkInput(random)
+            // Checks if input was correct or not
+            btn_next.setOnClickListener {
+                checkInput(random!!)
+            }
+
+            // Button for resetting the score
+            btn_reset.setOnClickListener {
+                resetScore()
+            }
+
+        } else {
+            img.setImageResource(R.drawable.person2)
+            emptyDatabase()
         }
+    }
 
-        // Button for resetting the score
-        btn_reset.setOnClickListener {
-            resetScore()
-        }
+    /**
+     * Shows a toast that the database is empty
+     */
+    private fun emptyDatabase() {
+        val toast = Toast.makeText(
+            applicationContext, R.string.quiz_db_empty,
+            Toast.LENGTH_SHORT
+        )
+        toast.show()
     }
 
     /**

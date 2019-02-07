@@ -22,4 +22,5 @@
     <string name="validation_empty">Navn kan ikke være tom</string>
     <string name="db_prepopulate">Legg til orginalnavn</string>
     <string name="db_delete_all">Slett alt</string>
+    <string name="quiz_db_empty">Databasen er tom, venligst legg til et navn</string>
 </resources>
