@@ -10,10 +10,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
-class NameAdapter(private var context: Context, private var nameList: List<Names>) : BaseAdapter() {
+class NameAdapter(private var context: Context, private var nameList: List<Names>?) : BaseAdapter() {
 
-    override fun getCount(): Int { return nameList.size }
-    override fun getItem(i: Int): Any { return nameList[i] }
+    override fun getCount(): Int { return nameList!!.size }
+    override fun getItem(i: Int): Any { return nameList!![i] }
     override fun getItemId(i: Int): Long { return i.toLong() }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup) : View {

@@ -28,10 +28,10 @@ class QuizActivity : AppCompatActivity() {
         var btn_reset = findViewById(R.id.button_quiz_reset) as Button
 
         // Getting global arraylist of names
-        var gv = applicationContext as GlobalVars
-        var list = gv.names
-
-        var random = list.random()
+        //var gv = applicationContext as GlobalVars
+        //var list = gv.names
+        var list: List<Names>? = AppDatabase.getDatabase(this).namesDao()?.getAll()
+        var random = list!!.random()
 
         // Sets the picture of the person to the imageview
         var imgFile = Uri.parse(random.imgId) as Uri

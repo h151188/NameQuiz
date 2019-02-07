@@ -22,7 +22,6 @@ class AddActivity : AppCompatActivity() {
     private val REQUEST_TAKE_PHOTO = 1
     private val GET_FROM_GALLERY = 3
     private var mCurrentPhotoPath: String = ""
-    private var db: AppDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +68,7 @@ class AddActivity : AppCompatActivity() {
         //val gv = applicationContext as GlobalVars
         //gv.names.add(name)
         System.out.println(name.name + " " + name.imgId)
-        db?.namesDao()?.insertName(name)
+        AppDatabase.getDatabase(this).namesDao()?.insertName(name)
         setResult(-1, replyIntent);
         finish()
     }
