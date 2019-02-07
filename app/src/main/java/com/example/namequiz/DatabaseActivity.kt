@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
 
@@ -28,7 +29,7 @@ class DatabaseActivity : AppCompatActivity() {
         //val gv = applicationContext as GlobalVars
 
         // Set up our database
-        var names: List<Names>? = AppDatabase.getDatabase(this).namesDao()?.getAll()
+        var names: MutableList<Names>? =  AppDatabase.getDatabase(this).namesDao()?.getAll()
 
         namesListView = findViewById(R.id.list_database) as ListView
 
@@ -68,7 +69,6 @@ class DatabaseActivity : AppCompatActivity() {
             // Refreshes the listview with the new name
             //namesListView.deferNotifyDataSetChanged()
             setListView()
-
             // Toast to show that the name was added to the database
             val toast = Toast.makeText(
                 applicationContext,

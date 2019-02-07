@@ -13,10 +13,6 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        val PREF_NAME: String = "PrefFile"
-    }
-
     private var appOwner: String = "owner"
 
     override fun onCreate(savedInstanceState: Bundle?) {
