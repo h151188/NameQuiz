@@ -75,6 +75,9 @@ class DatabaseActivity : AppCompatActivity() {
         } else if (id == R.id.menu_db_delete_all) {
             deleteAllConfirmation()
             return true
+        } else if (id == R.id.menu_change_preferences) {
+            val intent = Intent(applicationContext, PreferencesActivity::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
