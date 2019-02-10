@@ -26,22 +26,11 @@ class MainActivity : AppCompatActivity() {
         val btn_start = findViewById(R.id.button_start) as Button
         val btn_database = findViewById(R.id.button_database) as Button
         val btn_add = findViewById(R.id.button_add) as Button
-        val btn_ok = findViewById(R.id.button_ok) as Button
-
 
 
         this.checkNameOfOwner()
 
         // Set on-click listeners
-        btn_ok.setOnClickListener {
-            val name =  findViewById<TextView>(R.id.appOwner).getText().toString()
-            val editor = sharedPreferences!!.edit()
-            editor.putString(appOwner, name)
-            editor.apply()
-            btn_ok.visibility = View.INVISIBLE
-
-        }
-
         btn_start.setOnClickListener {
             val intent = Intent(applicationContext, QuizActivity::class.java)
             startActivity(intent)
@@ -67,11 +56,9 @@ class MainActivity : AppCompatActivity() {
 
         val name = sharedPreferences!!.getString(appOwner, "")
         if (name.equals("")){
-            findViewById<TextView>(R.id.appOwner).visibility = View.VISIBLE
-            findViewById<TextView>(R.id.appOwner).setHint("Please enter name")
+            val intent = Intent(applicationContext, PreferencesActivity::class.java)
+            startActivity(intent)
         } else {
-            findViewById<TextView>(R.id.button_ok).visibility = View.INVISIBLE
-            findViewById<TextView>(R.id.appOwner).visibility = View.INVISIBLE
             findViewById<TextView>(R.id.appOwnerSaved).visibility = View.VISIBLE
             findViewById<TextView>(R.id.appOwnerSaved).setText(name)
         }
