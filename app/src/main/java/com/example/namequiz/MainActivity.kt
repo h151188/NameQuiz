@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         val view = layoutInflater.inflate(R.layout.enter_name, null)
 
         val enterName = view.findViewById(R.id.enterNameEditText) as EditText
-
+        System.out.println(enterName)
         builder.setView(view);
 
         System.out.println(android.R.string.ok.toString())
