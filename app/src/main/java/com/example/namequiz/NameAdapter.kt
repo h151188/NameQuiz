@@ -12,6 +12,7 @@ class NameAdapter(private var context: Context, private var nameList: MutableLis
     override fun getCount(): Int { return nameList!!.size }
     override fun getItem(i: Int): Any { return nameList!![i] }
     override fun getItemId(i: Int): Long { return i.toLong() }
+    fun getContext():Context { return context }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
         var view = view

@@ -14,6 +14,7 @@ class QuizActivity : AppCompatActivity() {
     private var quiz_correct: Int = 0
     private var quiz_wrong: Int = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
@@ -83,6 +84,7 @@ class QuizActivity : AppCompatActivity() {
         var input: String = inputField.text.toString()
         inputField.setText("")
 
+
         if(input.equals(random.name, true)) {
             quiz_correct++
             val toast = Toast.makeText(
@@ -103,7 +105,13 @@ class QuizActivity : AppCompatActivity() {
         }
         updateScore()
     }
-
+    fun testScore(testVal: Int) {
+        if(testVal == 1) {
+            quiz_correct++
+        } else if (testVal == 2) {
+            quiz_wrong++
+        }
+    }
     /**
      * Updates the score view
      */
@@ -120,6 +128,13 @@ class QuizActivity : AppCompatActivity() {
         startQuiz()
     }
 
+    fun getScoreCorrect(): Int {
+        return quiz_correct
+    }
+
+    fun getScoreWrong(): Int {
+        return quiz_wrong
+    }
     /**
      * Creates an options menu to select activity
      */
