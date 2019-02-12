@@ -1,56 +1,56 @@
 package com.example.namequiz
 
- import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.persistence.room.Room
-import android.content.Context
-import android.support.test.InstrumentationRegistry
- import android.support.test.espresso.matcher.ViewMatchers
- import android.util.Log
-import org.junit.After
-import org.junit.Test
-
-import org.junit.Assert.*
+import android.support.test.rule.ActivityTestRule
+import android.support.test.runner.AndroidJUnit4
+import org.junit.runner.RunWith
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.matcher.ViewMatchers.*
+import android.support.test.filters.LargeTest
+import android.util.Log
 import org.junit.Before
 import org.junit.Rule
-import org.junit.rules.TestRule
-import org.junit.runner.RunWith
+import org.junit.Test
 
+@RunWith(AndroidJUnit4::class)
+@LargeTest
 class QuizActivityTest {
 
-    @Rule
-    @JvmField
-    val rule: TestRule = InstantTaskExecutorRule()
+    private lateinit var stringToBetyped: String
 
-
-    private lateinit var quizActivity: QuizActivity
+    @get:Rule
+    var activityRule: ActivityTestRule<QuizActivity>
+            = ActivityTestRule(QuizActivity::class.java)
 
     @Before
     fun setUp() {
-        System.out.println("BEFORE")
-        val context: Context = InstrumentationRegistry.getTargetContext()
-        try {
-        updateScore()
-
-        } catch (e: Exception) {
-            Log.i("test", e.message)
-        }
+        stringToBetyped = "Navnet"
     }
+
 
     @Test
-    fun updateScore() {
-        var beforeWrong = quizActivity.getScoreWrong()
-        var beforeCor = quizActivity.getScoreCorrect()
-        quizActivity.testScore(1)
-        quizActivity.testScore(2)
-        var afterWrong = quizActivity.getScoreWrong()
-        var afterCor = quizActivity.getScoreCorrect()
+    fun guess_wrong(){
+        Log.e("@Test","Performing guess success test")
+        Espresso.onView((withId(R.id.quiz_input)))
+            .perform(ViewActions.typeText(stringToBetyped), ViewActions.closeSoftKeyboard())
 
+        Espresso.onView(withId(R.id.button_quiz_next))
+            .perform(ViewActions.click());
 
-        System.out.println(assertEquals(afterCor, (beforeCor + 1)))
-        System.out.println(assertEquals(afterWrong, beforeWrong+1))
-
+        Espresso.onView(withId(R.id.quiz_wrong_score))
+            .check(matches(withText("1")))
     }
+    /*@Test
+    fun guess_correct(){
+        Log.e("@Test","Performing guess success test")
+        Espresso.onView((withId(R.id.quiz_input)))
+            .perform(ViewActions.typeText(R.id.quiz_pic.get), ViewActions.closeSoftKeyboard())
 
+        Espresso.onView(withId(R.id.button_quiz_next))
+            .perform(ViewActions.click());
 
-
+        Espresso.onView(withId(R.id.quiz_correct_score))
+            .check(matches(withText("1")))
+    }*/
 }
