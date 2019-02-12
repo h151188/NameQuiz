@@ -1,10 +1,11 @@
 package com.example.namequiz
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.persistence.room.Room
 import android.content.Context
 import android.support.test.InstrumentationRegistry
-import android.util.Log
+ import android.support.test.espresso.matcher.ViewMatchers
+ import android.util.Log
 import org.junit.After
 import org.junit.Test
 

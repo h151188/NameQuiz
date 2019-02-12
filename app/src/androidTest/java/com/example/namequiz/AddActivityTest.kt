@@ -21,8 +21,6 @@ class AddActivityTest {
     val rule: TestRule = InstantTaskExecutorRule()
 
     private lateinit var nameAdapter: NameAdapter
-    private lateinit var appDatabase: AppDatabase
-    private lateinit var namesListView: ListView
     private lateinit var names: MutableList<Names>
 
     @Before
@@ -49,7 +47,7 @@ class AddActivityTest {
         System.out.println("Before adding the count is: " + before)
         System.out.println("After adding the count is: " + after)
 
-        System.out.println(assertNotEquals(before+1, after))
+        System.out.println(assertEquals(before, after))
 
 
         before = after
@@ -60,6 +58,6 @@ class AddActivityTest {
 
         System.out.println("After deleting the count is: " + after)
 
-        System.out.println(assertNotEquals(before-1, after))
+        System.out.println(assertEquals(before, after))
     }
 }
