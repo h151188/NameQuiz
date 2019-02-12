@@ -35,11 +35,9 @@ class QuizActivityTest {
             Log.i("test", e.message)
         }
     }
-    //test
+
     @Test
     fun updateScore() {
-
-
         var beforeWrong = quizActivity.getScoreWrong()
         var beforeCor = quizActivity.getScoreCorrect()
         quizActivity.testScore(1)

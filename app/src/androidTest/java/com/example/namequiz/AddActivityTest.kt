@@ -1,63 +1,43 @@
 package com.example.namequiz
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.content.Context
-import android.support.test.InstrumentationRegistry
-import android.util.Log
-import android.widget.ListView
-import kotlinx.android.synthetic.main.activity_add.view.*
-import org.junit.Test
-
-import org.junit.Assert.*
+import android.support.test.espresso.Espresso.closeSoftKeyboard
+import android.support.test.filters.LargeTest
 import org.junit.Before
+import org.junit.Test
+import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.action.ViewActions.*
+import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.rule.ActivityTestRule
+import android.support.test.runner.AndroidJUnit4
 import org.junit.Rule
-import org.junit.rules.TestRule
-
-class AddActivityTest {
+import org.junit.runner.RunWith
 
 
-    @Rule
-    @JvmField
-    val rule: TestRule = InstantTaskExecutorRule()
+@RunWith(AndroidJUnit4::class)
+@LargeTest
+public class AddActivityTest {
 
-    private lateinit var nameAdapter: NameAdapter
-    private lateinit var names: MutableList<Names>
+    private lateinit var stringToBeTyped: String
+
+    @get:Rule
+    var activityRule: ActivityTestRule<AddActivity> = ActivityTestRule(AddActivity::class.java)
 
     @Before
-    fun setUp() {
-        System.out.println("BEFORE")
-        val context: Context = InstrumentationRegistry.getTargetContext()
-        try {
-            addNewName()
-        } catch (e: Exception) {
-            Log.i("test", e.message)
-        }
+    fun initValidString() {
+        // Specify a valid string.
+        stringToBeTyped = "Typing test name"
     }
+
 
     @Test
-    fun addNewName() {
-        names =  AppDatabase.getDatabase(InstrumentationRegistry.getTargetContext()).namesDao()?.getAll()
-        nameAdapter = NameAdapter(InstrumentationRegistry.getTargetContext(), names)
+    fun changeText_sameActivity() {
+        // Type text and then press the button.
 
-        var before = nameAdapter.count
-        var context = nameAdapter.getContext()
-        var test = Names("test", "hei")
-        AppDatabase.getDatabase(context).namesDao().insertName(test)
-        var after = nameAdapter.count
-        System.out.println("Before adding the count is: " + before)
-        System.out.println("After adding the count is: " + after)
+        onView(withId(R.id.new_name)).perform(typeText(stringToBeTyped), ViewActions.closeSoftKeyboard())
 
-        System.out.println(assertEquals(before, after))
+        onView(withId(R.id.new_add)).perform(click())
 
-
-        before = after
-        System.out.println("Before deleting the count is: " + before)
-
-        AppDatabase.getDatabase(context).namesDao()?.delete(test)
-        after = nameAdapter.count
-
-        System.out.println("After deleting the count is: " + after)
-
-        System.out.println(assertEquals(before, after))
     }
+
 }
