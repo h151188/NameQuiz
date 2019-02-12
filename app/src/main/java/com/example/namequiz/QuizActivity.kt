@@ -152,6 +152,9 @@ class QuizActivity : AppCompatActivity() {
         if (id == R.id.menu_quiz_reset) {
             resetConfirmation()
             return true
+        } else if (id == R.id.menu_change_preferences){
+            val intent = Intent(applicationContext, PreferencesActivity::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }

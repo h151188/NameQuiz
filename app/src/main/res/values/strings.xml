@@ -28,4 +28,5 @@
     <string name="db_delete_all_confirmation_title">Delete All</string>
     <string name="quiz_reset_score_confirmation">Are you sure you want to reset the score?</string>
     <string name="title_activity_preferences">Preferences</string>
+    <string name="change_preferences">Change preferences</string>
 </resources>
