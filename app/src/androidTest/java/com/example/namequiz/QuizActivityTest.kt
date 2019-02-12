@@ -31,7 +31,7 @@ class QuizActivityTest {
 
     @Test
     fun guess_wrong(){
-        Log.e("@Test","Performing guess success test")
+        Log.e("@Test","Performing guess wrong test")
         Espresso.onView((withId(R.id.quiz_input)))
             .perform(ViewActions.typeText(stringToBetyped), ViewActions.closeSoftKeyboard())
 
@@ -41,16 +41,16 @@ class QuizActivityTest {
         Espresso.onView(withId(R.id.quiz_wrong_score))
             .check(matches(withText("1")))
     }
-    /*@Test
+    @Test
     fun guess_correct(){
         Log.e("@Test","Performing guess success test")
         Espresso.onView((withId(R.id.quiz_input)))
-            .perform(ViewActions.typeText(R.id.quiz_pic.get), ViewActions.closeSoftKeyboard())
+            .perform(ViewActions.typeText(activityRule.activity.getName().name), ViewActions.closeSoftKeyboard())
 
         Espresso.onView(withId(R.id.button_quiz_next))
             .perform(ViewActions.click());
 
         Espresso.onView(withId(R.id.quiz_correct_score))
             .check(matches(withText("1")))
-    }*/
+    }
 }

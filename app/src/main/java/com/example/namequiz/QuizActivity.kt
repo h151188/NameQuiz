@@ -13,6 +13,7 @@ class QuizActivity : AppCompatActivity() {
 
     private var quiz_correct: Int = 0
     private var quiz_wrong: Int = 0
+    private lateinit var name: Names
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,7 @@ class QuizActivity : AppCompatActivity() {
 
         if(!list.isNullOrEmpty()) {
             random = list.random()
+            name = random
 
             // Sets the picture of the person to the imageview
             var imgFile = Uri.parse(random.imgId) as Uri
@@ -105,13 +107,7 @@ class QuizActivity : AppCompatActivity() {
         }
         updateScore()
     }
-    fun testScore(testVal: Int) {
-        if(testVal == 1) {
-            quiz_correct++
-        } else if (testVal == 2) {
-            quiz_wrong++
-        }
-    }
+
     /**
      * Updates the score view
      */
@@ -128,13 +124,6 @@ class QuizActivity : AppCompatActivity() {
         startQuiz()
     }
 
-    fun getScoreCorrect(): Int {
-        return quiz_correct
-    }
-
-    fun getScoreWrong(): Int {
-        return quiz_wrong
-    }
     /**
      * Creates an options menu to select activity
      */
@@ -192,5 +181,12 @@ class QuizActivity : AppCompatActivity() {
 
         // Display the alert dialog on app interface
         dialog.show()
+    }
+
+    /**
+     * Returns the current name showed in the QuizActivity
+     */
+    fun getName() : Names {
+        return name;
     }
 }
