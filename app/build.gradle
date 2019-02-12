@@ -17,6 +17,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -43,26 +44,7 @@ dependencies {
     androidTestImplementation "android.arch.core:core-testing:1.1.0"
 
     //compile "com.android.support:support-emoji:28.0.0"
-
-    //Espresso dependendices
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    testImplementation 'junit:junit:4.12'
-
-    // Android runner and rules support
-    androidtestImplementation 'com.android.support.test:runner:0.5'
-    androidtestImplementation 'com.android.support.test:rules:0.5'
-
-    // Espresso support
-    androidtestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
-    // add this for intent mocking support
-    androidtestImplementation 'com.android.support.test.espresso:espresso-intents:2.2.2'
-
-    // add this for webview testing support
-    androidtestImplementation 'com.android.support.test.espresso:espresso-web:2.2.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
 
 kotlin {
