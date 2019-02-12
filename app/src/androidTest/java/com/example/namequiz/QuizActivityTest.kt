@@ -16,6 +16,9 @@ import org.junit.runner.RunWith
 
 class QuizActivityTest {
 
+    @Rule
+    @JvmField
+    val rule: TestRule = InstantTaskExecutorRule()
 
 
     private lateinit var quizActivity: QuizActivity
@@ -25,7 +28,7 @@ class QuizActivityTest {
         System.out.println("BEFORE")
         val context: Context = InstrumentationRegistry.getTargetContext()
         try {
-
+        updateScore()
 
         } catch (e: Exception) {
             Log.i("test", e.message)

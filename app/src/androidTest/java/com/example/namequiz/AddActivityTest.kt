@@ -1,16 +1,37 @@
 package com.example.namequiz
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.content.Context
+import android.support.test.InstrumentationRegistry
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_add.view.*
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
+import org.junit.Rule
+import org.junit.rules.TestRule
 
 class AddActivityTest {
 
+
+    @Rule
+    @JvmField
+    val rule: TestRule = InstantTaskExecutorRule()
+
     private lateinit var nameAdapter: NameAdapter
     private lateinit var appDatabase: AppDatabase
+    @Before
+    fun setUp() {
+        System.out.println("BEFORE")
+        val context: Context = InstrumentationRegistry.getTargetContext()
+        try {
+            addNewName()
 
+        } catch (e: Exception) {
+            Log.i("test", e.message)
+        }
+    }
 
     @Test
     fun addNewName() {
