@@ -30,4 +30,5 @@
     <string name="quiz_reset_score_confirmation">Er du sikker på at du vil tilbakestille poengene?</string>
     <string name="change_preferences">Endre innstillinger</string>
     <string name="title_activity_preferences">Innstillinger</string>
+    <string name="logo">Logo</string>
 </resources>

@@ -10,7 +10,8 @@
             android:layout_width="336dp"
             android:layout_height="190dp" app:srcCompat="@drawable/namequiz"
             android:id="@+id/imageView" android:scaleType="centerInside" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/logo"/>
     <Button
             android:text="@string/start_quiz"
             android:layout_width="wrap_content"

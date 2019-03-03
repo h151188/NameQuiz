@@ -29,4 +29,5 @@
     <string name="quiz_reset_score_confirmation">Are you sure you want to reset the score?</string>
     <string name="title_activity_preferences">Preferences</string>
     <string name="change_preferences">Change preferences</string>
+    <string name="logo">Logo</string>
 </resources>

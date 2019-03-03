@@ -9,8 +9,10 @@
 
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/namequiz" tools:layout_editor_absoluteY="1dp"
-            tools:layout_editor_absoluteX="0dp" android:id="@+id/imageView2"/>
+            android:layout_height="wrap_content" app:srcCompat="@drawable/namequiz"
+            android:id="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/logo"/>
 
     <EditText
             android:layout_width="wrap_content"
